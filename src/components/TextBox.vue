@@ -33,18 +33,18 @@ export default defineComponent({
     }
   },
   data () {
-    return { currentText: '' }
+    return {
+      currentText: '',
+      currentTextHighlighted: ''
+    }
   },
   computed: {
-    currentTextHighlighted () {
-      return hljs.highlight(this.currentText, { language: this.languageName }).value
-    },
     currentTimeFrame () {
       const indexOfCurrentFrame = this.timeFrames.findIndex((timeframe) => {
         return timeframe.startTime <= this.currentTime && timeframe.endTime >= this.currentTime
       })
       if (indexOfCurrentFrame === -1) {
-        return { action: 'clean', startTime: 0, endTime: 0, text: '' }
+        return { action: 'clean', startTime: 0, endTime: 0, text: '' } as timeFragment
       } else {
         return this.timeFrames[indexOfCurrentFrame]
       }
@@ -60,24 +60,24 @@ export default defineComponent({
     clean () {
       this.currentText = ''
     },
-    renderHighlightedText () {
-      (this.$refs.textArea as any).innerHTML = this.currentTextHighlighted
+    highlightText (text: string) {
+      return '<div>' + hljs.highlight(text, { language: this.languageName }).value + '</div>'
     }
   },
   watch: {
     currentTimeFrame: function (newValue: timeFragment) {
+      const textarea = (this.$refs.textArea as HTMLElement)
       switch (this.currentTimeFrame.action) {
         case ('nextSlide'):
-          this.nextSlide(newValue)
+          textarea.innerHTML = this.highlightText(newValue.text)
           break
         case ('append'):
-          this.append(newValue)
+          textarea.innerHTML += this.highlightText(newValue.text)
           break
         case ('clean'):
-          this.clean()
+          textarea.innerHTML = ''
           break
       }
-      this.renderHighlightedText()
     }
   }
 })

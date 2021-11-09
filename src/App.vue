@@ -40,9 +40,9 @@ export default defineComponent({
     }
   },
   methods: {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    setCurrentTime (payload: any) {
-      this.currentTime = Math.floor(payload.target.currentTime)
+    setCurrentTime (payload: Event) {
+      const target = payload.target as HTMLAudioElement
+      this.currentTime = Math.floor(target.currentTime)
     }
   }
 })
