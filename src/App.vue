@@ -18,24 +18,32 @@ export default defineComponent({
   data () {
     return {
       counter: 0,
-      timeframes: [{
-        action: 'nextSlide', startTime: 1, endTime: 6, text: `
-      .firstClass {
-        display: none
-      }
-      `
-      },
-      {
-        action: 'append',
-        startTime: 6,
-        endTime: 12,
-        text: `
-        .secondClass {
-          display: flex
+      timeframes: [
+        {
+          action: 'nextSlide',
+          startTime: 1,
+          endTime: 6,
+          text:
+`.firstClass {
+  display: none
+}`
+        },
+        {
+          action: 'append',
+          startTime: 6,
+          endTime: 12,
+          text:
+`.secondClass { 
+  display: flex
+}`
+        },
+        {
+          action: 'nextSlide',
+          startTime: 12,
+          endTime: 18,
+          text: '.cssZalupa {display: block}'
         }
-        `
-      },
-      { action: 'nextSlide', startTime: 12, endTime: 18, text: '.cssZalupa {display: block}' }] as timeFragment[],
+      ] as timeFragment[],
       currentTime: 0
     }
   },

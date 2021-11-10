@@ -7,6 +7,7 @@ import { defineComponent, PropType } from '@vue/runtime-core'
 import { timeFragment } from '@/types/timeFragment'
 import hljs from 'highlight.js/lib/core'
 import 'highlight.js/styles/shades-of-purple.css'
+import { indexedTimeFragment } from '@/types/indexedTimeFragment'
 
 export default defineComponent({
   name: 'TextBox',
@@ -35,7 +36,8 @@ export default defineComponent({
   data () {
     return {
       currentText: '',
-      currentTextHighlighted: ''
+      currentTextHighlighted: '',
+      lastId: 0
     }
   },
   computed: {
@@ -44,9 +46,9 @@ export default defineComponent({
         return timeframe.startTime <= this.currentTime && timeframe.endTime >= this.currentTime
       })
       if (indexOfCurrentFrame === -1) {
-        return { action: 'clean', startTime: 0, endTime: 0, text: '' } as timeFragment
+        return { timeFragment: { action: 'clean', startTime: 0, endTime: 0, text: '' }, id: indexOfCurrentFrame } as indexedTimeFragment
       } else {
-        return this.timeFrames[indexOfCurrentFrame]
+        return { timeFragment: this.timeFrames[indexOfCurrentFrame], id: indexOfCurrentFrame } as indexedTimeFragment
       }
     }
   },
@@ -65,18 +67,24 @@ export default defineComponent({
     }
   },
   watch: {
-    currentTimeFrame: function (newValue: timeFragment) {
+    currentTimeFrame: function (newValue: indexedTimeFragment) {
       const textarea = (this.$refs.textArea as HTMLElement)
-      switch (this.currentTimeFrame.action) {
-        case ('nextSlide'):
-          textarea.innerHTML = this.highlightText(newValue.text)
-          break
-        case ('append'):
-          textarea.innerHTML += this.highlightText(newValue.text)
-          break
-        case ('clean'):
+      if (newValue.id !== this.lastId) {
+        if (newValue.id < this.lastId) {
           textarea.innerHTML = ''
-          break
+        }
+        this.lastId = newValue.id
+        switch (this.currentTimeFrame.timeFragment.action) {
+          case ('nextSlide'):
+            textarea.innerHTML = this.highlightText(newValue.timeFragment.text)
+            break
+          case ('append'):
+            textarea.innerHTML += this.highlightText(newValue.timeFragment.text)
+            break
+          case ('clean'):
+            textarea.innerHTML = ''
+            break
+        }
       }
     }
   }
