@@ -21,7 +21,7 @@ export default defineComponent({
       timeframes: [
         {
           action: 'nextSlide',
-          startTime: 1,
+          startTime: 2,
           endTime: 6,
           text:
 `.firstClass {
