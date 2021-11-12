@@ -45,6 +45,7 @@ export default defineComponent({
       const indexOfCurrentFrame = this.timeFrames.findIndex((timeframe) => {
         return timeframe.startTime <= this.currentTime && timeframe.endTime >= this.currentTime
       })
+      // clear textbox if there's no frames for this timeFragment
       if (indexOfCurrentFrame === -1) {
         return { timeFragment: { action: 'clean', startTime: 0, endTime: 0, text: '' }, id: indexOfCurrentFrame } as indexedTimeFragment
       } else {
@@ -53,15 +54,6 @@ export default defineComponent({
     }
   },
   methods: {
-    nextSlide (newVal: timeFragment) {
-      this.currentText = newVal.text
-    },
-    append (newVal: timeFragment) {
-      this.currentText += newVal.text
-    },
-    clean () {
-      this.currentText = ''
-    },
     highlightText (text: string) {
       return '<div>' + hljs.highlight(text, { language: this.languageName }).value + '</div>'
     }
