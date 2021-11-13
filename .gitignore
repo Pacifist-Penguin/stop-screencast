@@ -1,7 +1,6 @@
 .DS_Store
 node_modules
 /dist
-src/assets/audiofile.mp3
 
 /tests/e2e/videos/
 /tests/e2e/screenshots/
