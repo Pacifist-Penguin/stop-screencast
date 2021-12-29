@@ -10,6 +10,33 @@ import { defineComponent } from '@vue/runtime-core'
 import TextBox from './components/TextBox.vue'
 import { timeFragment } from './types/timeFragment'
 
+const example = [
+  {
+    action: 'nextSlide',
+    startTime: 1,
+    endTime: 6,
+    text:
+`.firstClass {
+  display: none
+}`
+  },
+  {
+    action: 'append',
+    startTime: 6,
+    endTime: 12,
+    text:
+`.secondClass { 
+  display: flex
+}`
+  },
+  {
+    action: 'nextSlide',
+    startTime: 12,
+    endTime: 18,
+    text: '.display-as-block {display: block}'
+  }
+] as timeFragment[]
+
 export default defineComponent({
   name: 'App',
   components: {
@@ -18,32 +45,7 @@ export default defineComponent({
   data () {
     return {
       counter: 0,
-      timeframes: [
-        {
-          action: 'nextSlide',
-          startTime: 2,
-          endTime: 6,
-          text:
-`.firstClass {
-  display: none
-}`
-        },
-        {
-          action: 'append',
-          startTime: 6,
-          endTime: 12,
-          text:
-`.secondClass { 
-  display: flex
-}`
-        },
-        {
-          action: 'nextSlide',
-          startTime: 12,
-          endTime: 18,
-          text: '.cssZalupa {display: block}'
-        }
-      ] as timeFragment[],
+      timeframes: example,
       currentTime: 0
     }
   },

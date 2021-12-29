@@ -1,5 +1,5 @@
 <template>
-  <div class="textContainer" ref="textArea" />
+  <section class="textContainer" ref="textArea" />
 </template>
 
 <script lang="ts">
@@ -16,6 +16,11 @@ export default defineComponent({
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const registeredLanguage = require(`highlight.js/lib/languages/${this.languageName}`)
     hljs.registerLanguage(this.languageName, registeredLanguage)
+    const firstElement = this.timeFrames[0]
+    // fixes some browser-related issue
+    if (firstElement.startTime < 2) {
+      (this.$refs.textArea as HTMLElement).innerHTML = this.highlightText(firstElement.text)
+    }
   },
   props: {
     timeFrames: {
@@ -85,7 +90,7 @@ export default defineComponent({
 
 <style scoped>
 .textContainer {
-  background-color: #2D2B55;
+  background-color: #2d2b55;
   width: 90%;
   height: 85vh;
   padding-top: 2.5vh;
@@ -95,7 +100,7 @@ export default defineComponent({
   margin-right: auto;
   margin-top: 2.5vh;
   border-radius: 1vmin;
-  color: #FAD000;
+  color: #fad000;
   white-space: break-spaces;
 }
 </style>

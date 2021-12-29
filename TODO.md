@@ -1,1 +1,2 @@
 * Figure out why start time can't be less than 2 for timeframe
+    I have fixed the unexpected behavior. However, I can't figure out why the audio element doesn't fire a timeupdate event in the first 2 seconds.
