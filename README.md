@@ -1,5 +1,7 @@
 # stop-screencast-now
 
+Just a prototype. This app (or I would say a component) is inspired by the khan academy component used in the JS course.
+
 ## Project setup
 ```
 npm install
