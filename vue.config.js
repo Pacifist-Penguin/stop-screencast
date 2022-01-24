@@ -1,3 +1,3 @@
 module.exports = {
-  publicPath: "/stop-screencast/"
+  publicPath: "stop-screencast/"
 }
