@@ -31,3 +31,11 @@ jobs:
       with:
         build: npm run build
         start: npm run serve
+    - name: Generate
+      run: npm run generate
+
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./dist
