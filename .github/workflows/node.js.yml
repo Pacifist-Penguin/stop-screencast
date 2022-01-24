@@ -32,7 +32,7 @@ jobs:
         build: npm run build
         start: npm run serve
     - name: Generate
-      run: npm run generate
+      run: npm run build
 
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
