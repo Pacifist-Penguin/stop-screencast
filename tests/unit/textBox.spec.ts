@@ -57,11 +57,11 @@ async function frameTest (expectedHTML:string, lastFrameOfTest:timeFragment) {
   expect(minfiedRecievedHTML).toContain(expectedHTML)
 }
 test('waits until the third timeframe and displays the result', async () => {
-  return await frameTest('<div class="textContainer"><div><span class="hljs-selector-class">.thirdClass</span> {<span class="hljs-attribute">display</span>: block}</div></div>',
+  return await frameTest('<section class="textContainer"> <div><span class="hljs-selector-class">.thirdClass</span> {<span class="hljs-attribute">display</span>: block}</div> </section>',
     commonProps.timeFrames[commonProps.timeFrames.length - 1])
 })
 
 test('waits until the second timeframe and displays the result', async () => {
-  return await frameTest('<div class="textContainer"><div><span class="hljs-selector-class">.firstClass</span> { <span class="hljs-attribute">display</span>: none }</div><div><span class="hljs-selector-class">.secondClass</span> { <span class="hljs-attribute">display</span>: flex }</div></div>',
+  return await frameTest('<section class="textContainer"> <div><span class="hljs-selector-class">.firstClass</span> { <span class="hljs-attribute">display</span>: none } </div> <div><span class="hljs-selector-class">.secondClass</span> { <span class="hljs-attribute">display</span>: flex } </div> </section>',
     commonProps.timeFrames[commonProps.timeFrames.length - 2])
 })

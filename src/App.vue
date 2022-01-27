@@ -1,7 +1,7 @@
 <template>
     <text-box :current-time="currentTime" :language-name="'css'" :time-frames="timeframes" />
     <audio class="audio" @timeupdate="setCurrentTime" controls>
-      <source src="./assets/audiofile.ogg" type="audio/mpeg" />
+      <source src="/assets/audiofile.ogg" type="audio/mpeg" />
     </audio>
 </template>
 
